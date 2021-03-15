@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://zain:zain@devconnector.fwzky.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken",
+  "githubClientId": "5b4411c35b68498b5752",
+  "githubSecret": "1d478b8794f022e9afa5b89bfdf4c69452524f48"
+}
