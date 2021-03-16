@@ -1,7 +1,10 @@
 import { Fragment, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { registerUser } from "../../store/actions/creators";
 
 const Register = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,6 +22,7 @@ const Register = () => {
       console.log("Password do not match");
       return;
     }
+    dispatch(registerUser(formData));
     console.log(formData);
   };
 
