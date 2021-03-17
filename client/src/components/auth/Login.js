@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { loginUser } from "../../store/actions/creators/Auth";
@@ -24,7 +24,6 @@ const Login = () => {
 
   return (
     <Fragment>
-      {/* <div className="alert alert-danger">Invalid credentials</div> */}
       <h1 className="large text-primary">Sign In</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Sign into Your Account

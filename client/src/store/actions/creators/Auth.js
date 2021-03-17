@@ -6,6 +6,7 @@ import {
   LOGIN_FAILURE,
   LOGIN_INITIATE,
   LOGIN_SUCCESS,
+  LOGOUT,
   REGISTER_FAILURE,
   REGISTER_INITIATE,
   REGISTER_SUCCESS,
@@ -65,3 +66,5 @@ export const loginUser = (email, password) => async (dispatch) => {
     dispatch(actionDispatch(LOGIN_FAILURE));
   }
 };
+
+export const logoutUser = () => (dispatch) => dispatch(actionDispatch(LOGOUT));
