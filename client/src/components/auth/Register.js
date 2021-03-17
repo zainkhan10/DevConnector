@@ -1,10 +1,11 @@
 import { Fragment, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { registerUser } from "../../store/actions/creators";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { registerUser, setAlert } from "../../store/actions/creators";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector(({ auth }) => auth);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,12 +14,15 @@ const Register = () => {
   });
   const { name, email, password, password2 } = formData;
 
+  if (isAuthenticated) return <Redirect to="/dashboard" />;
+
   const onChange = ({ target }) =>
     setFormData({ ...formData, [target.name]: target.value });
 
   const onSubmit = (ev) => {
     ev.preventDefault();
     if (password !== password2) {
+      dispatch(setAlert("Password do not match", "danger"));
       console.log("Password do not match");
       return;
     }
@@ -40,7 +44,6 @@ const Register = () => {
             value={name}
             onChange={onChange}
             name="name"
-            required
           />
         </div>
         <div className="form-group">

@@ -1,24 +1,35 @@
-import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { loginUser } from "../../store/actions/creators/Auth";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector(({ auth }) => auth);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const { email, password } = formData;
 
+  if (isAuthenticated) return <Redirect to="/dashboard" />;
+
   const onChange = ({ target }) =>
     setFormData({ ...formData, [target.name]: target.value });
 
+  const onSubmit = (ev) => {
+    ev.preventDefault();
+    dispatch(loginUser(email, password));
+  };
+
   return (
     <Fragment>
-      <div className="alert alert-danger">Invalid credentials</div>
+      {/* <div className="alert alert-danger">Invalid credentials</div> */}
       <h1 className="large text-primary">Sign In</h1>
       <p className="lead">
         <i className="fas fa-user"></i> Sign into Your Account
       </p>
-      <form className="form" action="dashboard.html">
+      <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
           <input
             type="email"
