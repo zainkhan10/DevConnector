@@ -3,6 +3,7 @@ import { getFromLocal } from "../../../utils/cache";
 import { HttpRequest } from "../../../utils/httpRequests";
 import {
   AUTH_ERRORS,
+  CLEAR_PROFILE,
   LOGIN_FAILURE,
   LOGIN_INITIATE,
   LOGIN_SUCCESS,
@@ -67,4 +68,7 @@ export const loginUser = (email, password) => async (dispatch) => {
   }
 };
 
-export const logoutUser = () => (dispatch) => dispatch(actionDispatch(LOGOUT));
+export const logoutUser = () => (dispatch) => {
+  dispatch(actionDispatch(LOGOUT));
+  dispatch(actionDispatch(CLEAR_PROFILE));
+};

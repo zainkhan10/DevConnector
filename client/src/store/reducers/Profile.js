@@ -1,4 +1,5 @@
 import {
+  CLEAR_PROFILE,
   GET_PROFILE_FAILURE,
   GET_PROFILE_INITIATE,
   GET_PROFILE_SUCCESS,
@@ -23,6 +24,16 @@ export const profileReducer = (state = initState, action) => {
 
     case GET_PROFILE_FAILURE:
       return { ...state, loading: false, error: payload };
+
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        loading: false,
+        profile: null,
+        profiles: [],
+        error: null,
+        repos: [],
+      };
 
     default:
       return state;
