@@ -1,7 +1,7 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCurrentProfile } from "../../store/actions/creators/Profile";
+import { getCurrentProfile } from "../../store/actions/creators";
 import Spinner from "../layout/Spinner";
 const Dashboard = () => {
   const dispatch = useDispatch();
