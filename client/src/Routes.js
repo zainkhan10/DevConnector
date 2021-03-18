@@ -16,8 +16,10 @@ import { setAuthToken } from "./utils/authToken";
 import "./App.css";
 import { loadUser } from "./store/actions/creators";
 import Dashboard from "./components/dashboard/Dashboard";
-import CreateProfile from "./components/pofile-forms/CreateProfile";
-import EditProfile from "./components/pofile-forms/EditProfile";
+import CreateProfile from "./components/profile-forms/CreateProfile";
+import EditProfile from "./components/profile-forms/EditProfile";
+import AddExperience from "./components/profile-forms/AddExperience";
+import AddEducation from "./components/profile-forms/AddEducation";
 
 const token = getFromLocal("token");
 if (token) {
@@ -68,6 +70,8 @@ export const protectedRoutes = () => {
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/create-profile" component={CreateProfile} />
       <Route exact path="/edit-profile" component={EditProfile} />
+      <Route exact path="/add-experience" component={AddExperience} />
+      <Route exact path="/add-education" component={AddEducation} />
     </Switch>
   );
 };
