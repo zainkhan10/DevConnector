@@ -17,6 +17,7 @@ import "./App.css";
 import { loadUser } from "./store/actions/creators";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/pofile-forms/CreateProfile";
+import EditProfile from "./components/pofile-forms/EditProfile";
 
 const token = getFromLocal("token");
 if (token) {
@@ -66,6 +67,7 @@ export const protectedRoutes = () => {
     <Switch>
       <Route exact path="/dashboard" component={Dashboard} />
       <Route exact path="/create-profile" component={CreateProfile} />
+      <Route exact path="/edit-profile" component={EditProfile} />
     </Switch>
   );
 };
