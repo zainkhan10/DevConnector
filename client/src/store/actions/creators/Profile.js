@@ -1,5 +1,7 @@
 import { HttpRequest } from "../../../utils/httpRequests";
 import {
+  CLEAR_PROFILE,
+  ACCOUNT_DELETED,
   GET_PROFILE_FAILURE,
   GET_PROFILE_INITIATE,
   GET_PROFILE_SUCCESS,
@@ -91,5 +93,60 @@ export const addEducation = (formData, history) => async (dispatch) => {
         status: err.response.status,
       })
     );
+  }
+};
+
+export const deleteExperience = (id) => async (dispatch) => {
+  try {
+    dispatch(actionDispatch(GET_PROFILE_INITIATE));
+    const response = await HttpRequest({
+      method: "delete",
+      uri: `/profile/experience/${id}`,
+    });
+    dispatch(actionDispatch(UPDATE_PROFILE, response));
+    dispatch(setAlert("Expeirence Removed", "success"));
+  } catch (err) {
+    actionDispatch(GET_PROFILE_FAILURE, {
+      msg: err.response.statusText,
+      status: err.response.status,
+    });
+  }
+};
+
+export const deleteEducation = (id) => async (dispatch) => {
+  try {
+    dispatch(actionDispatch(GET_PROFILE_INITIATE));
+    const response = await HttpRequest({
+      method: "delete",
+      uri: `/profile/education/${id}`,
+    });
+    dispatch(actionDispatch(UPDATE_PROFILE, response));
+    dispatch(setAlert("Education Removed", "success"));
+  } catch (err) {
+    actionDispatch(GET_PROFILE_FAILURE, {
+      msg: err.response.statusText,
+      status: err.response.status,
+    });
+  }
+};
+
+export const deleteAccount = () => async (dispatch) => {
+  if (window.confirm("Are you sure? This can NOT be undone!")) {
+    try {
+      await HttpRequest({
+        method: "delete",
+        uri: "/profile",
+      });
+      dispatch(actionDispatch(CLEAR_PROFILE));
+      dispatch(actionDispatch(ACCOUNT_DELETED));
+      dispatch(
+        setAlert("Your account has been permanantly deleted", "success")
+      );
+    } catch (err) {
+      actionDispatch(GET_PROFILE_FAILURE, {
+        msg: err.response.statusText,
+        status: err.response.status,
+      });
+    }
   }
 };

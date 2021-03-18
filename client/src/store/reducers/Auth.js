@@ -1,5 +1,6 @@
 import { getFromLocal, saveToLocal, removeFromLocal } from "../../utils/cache";
 import {
+  ACCOUNT_DELETED,
   AUTH_ERRORS,
   LOGIN_FAILURE,
   LOGIN_INITIATE,
@@ -47,6 +48,7 @@ export const authReducer = (state = initState, action) => {
     case AUTH_ERRORS:
     case LOGIN_FAILURE:
     case LOGOUT:
+    case ACCOUNT_DELETED:
       removeFromLocal("token");
       return {
         ...state,
