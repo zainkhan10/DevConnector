@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { getCurrentProfile } from "../../store/actions/creators";
 import Spinner from "../layout/Spinner";
 import DashboardActions from "./DashboardActions";
+import Education from "./Education";
+import Experience from "./Experience";
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { loading, profile } = useSelector(({ profile }) => profile);
@@ -23,11 +25,15 @@ const Dashboard = () => {
       {profile ? (
         <Fragment>
           <DashboardActions />
+          <Experience experiences={profile.experience} />
+          <Education education={profile.education} />
         </Fragment>
       ) : (
         <Fragment>
           <p>You have not yet setup a profile, please add some info</p>
-          <Link to="/create-profile" className="btn btn-primary my-1">Create Profile</Link>
+          <Link to="/create-profile" className="btn btn-primary my-1">
+            Create Profile
+          </Link>
         </Fragment>
       )}
     </Fragment>
