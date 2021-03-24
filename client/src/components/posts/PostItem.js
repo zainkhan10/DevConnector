@@ -1,7 +1,7 @@
 import Moment from "react-moment";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addLike, removeLike } from "../../store/actions/creators";
+import { addLike, deletePost, removeLike } from "../../store/actions/creators";
 
 const PostItem = ({
   post: { avatar, name, text, date, likes, comments, user, _id },
@@ -11,6 +11,8 @@ const PostItem = ({
 
   const likePost = (id) => dispatch(addLike(id));
   const unlikePost = (id) => dispatch(removeLike(id));
+
+  const removePost = (id) => dispatch(deletePost(id))
 
   return (
     <div className="post bg-white p-1 my-1">
@@ -47,7 +49,7 @@ const PostItem = ({
           )}
         </Link>
         {auth.isAuthenticated && auth.user._id === user && (
-          <button type="button" className="btn btn-danger">
+          <button type="button" className="btn btn-danger" onClick={() => removePost(_id)}>
             <i className="fas fa-times"></i>
           </button>
         )}

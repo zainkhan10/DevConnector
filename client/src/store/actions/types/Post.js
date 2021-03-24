@@ -4,3 +4,5 @@ export const GET_POSTS_FAILURE = "GET_POSTS_FAILURE";
 
 export const UPDATE_LIKES = "UPDATE_LIKES";
 export const REMOVE_LIKES = "REMOVE_LIKES";
+
+export const DELETE_POST = "DELETE_POST";

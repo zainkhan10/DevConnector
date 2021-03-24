@@ -1,4 +1,5 @@
 import {
+  DELETE_POST,
   GET_POSTS_FAILURE,
   GET_POSTS_INITIATE,
   GET_POSTS_SUCCESS,
@@ -31,6 +32,13 @@ export const postReducer = (state = initState, action) => {
         post._id === payload.id ? { ...post, likes: payload.likes } : post
       );
       return { ...state, loading: false, posts: updatedPost };
+
+    case DELETE_POST:
+      return {
+        ...state,
+        loading: false,
+        posts: state.posts.filter((post) => post._id !== payload),
+      };
 
     default:
       return state;
