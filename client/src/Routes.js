@@ -22,6 +22,7 @@ import AddExperience from "./components/profile-forms/AddExperience";
 import AddEducation from "./components/profile-forms/AddEducation";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
+import Posts from "./components/posts/Posts";
 
 const token = getFromLocal("token");
 if (token) {
@@ -76,6 +77,7 @@ export const protectedRoutes = () => {
       <Route exact path="/edit-profile" component={EditProfile} />
       <Route exact path="/add-experience" component={AddExperience} />
       <Route exact path="/add-education" component={AddEducation} />
+      <Route exact path="/posts" component={Posts} />
     </Switch>
   );
 };
