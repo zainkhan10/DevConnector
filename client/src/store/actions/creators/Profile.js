@@ -6,6 +6,12 @@ import {
   GET_PROFILE_INITIATE,
   GET_PROFILE_SUCCESS,
   UPDATE_PROFILE,
+  GET_PROFILES_INITIATE,
+  GET_PROFILES_SUCCESS,
+  GET_PROFILES_FAILURE,
+  GET_REPOS_SUCCESS,
+  GET_REPOS_FAILURE,
+  GET_REPOS_INITIATE,
 } from "../types";
 import { actionDispatch } from "./ActionDispatcher";
 import { setAlert } from "./Alert";
@@ -18,6 +24,57 @@ export const getCurrentProfile = () => async (dispatch) => {
   } catch (err) {
     dispatch(
       actionDispatch(GET_PROFILE_FAILURE, {
+        msg: err.response.statusText,
+        status: err.response.status,
+      })
+    );
+  }
+};
+
+export const getProfiles = () => async (dispatch) => {
+  try {
+    dispatch(actionDispatch(CLEAR_PROFILE));
+    dispatch(actionDispatch(GET_PROFILES_INITIATE));
+    const response = await HttpRequest({ method: "GET", uri: "/profile" });
+    dispatch(actionDispatch(GET_PROFILES_SUCCESS, response));
+  } catch (err) {
+    dispatch(
+      actionDispatch(GET_PROFILES_FAILURE, {
+        msg: err.response.statusText,
+        status: err.response.status,
+      })
+    );
+  }
+};
+
+export const getProfileById = (userID) => async (dispatch) => {
+  try {
+    dispatch(actionDispatch(GET_PROFILE_INITIATE));
+    const response = await HttpRequest({
+      method: "GET",
+      uri: `/profile/user/${userID}`,
+    });
+    dispatch(actionDispatch(GET_PROFILE_SUCCESS, response));
+  } catch (err) {
+    dispatch(
+      actionDispatch(GET_PROFILE_FAILURE, {
+        msg: err.response.statusText,
+        status: err.response.status,
+      })
+    );
+  }
+};
+
+export const getGithubRepos = (username) => async (dispatch) => {
+  try {
+    const response = await HttpRequest({
+      method: "GET",
+      uri: `/profile/github/${username}`,
+    });
+    dispatch(actionDispatch(GET_REPOS_SUCCESS, response));
+  } catch (err) {
+    dispatch(
+      actionDispatch(GET_REPOS_FAILURE, {
         msg: err.response.statusText,
         status: err.response.status,
       })

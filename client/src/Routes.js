@@ -6,20 +6,22 @@ import {
   Route,
   Switch,
 } from "react-router-dom";
+import "./App.css";
+import { loadUser } from "./store/actions/creators";
+import { getFromLocal } from "./utils/cache";
+import { setAuthToken } from "./utils/authToken";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Landing from "./components/layout/Landing";
 import Navbar from "./components/layout/Navbar";
 import Alert from "./components/layout/Alert";
-import { getFromLocal } from "./utils/cache";
-import { setAuthToken } from "./utils/authToken";
-import "./App.css";
-import { loadUser } from "./store/actions/creators";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateProfile from "./components/profile-forms/CreateProfile";
 import EditProfile from "./components/profile-forms/EditProfile";
 import AddExperience from "./components/profile-forms/AddExperience";
 import AddEducation from "./components/profile-forms/AddEducation";
+import Profiles from "./components/profiles/Profiles";
+import Profile from "./components/profile/Profile";
 
 const token = getFromLocal("token");
 if (token) {
@@ -31,7 +33,7 @@ const Routes = () => {
 
   useEffect(() => {
     dispatch(loadUser());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Router>
@@ -43,6 +45,8 @@ const Routes = () => {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/profiles" component={Profiles} />
+            <Route exact path="/profile/:id" component={Profile} />
             <PrivateRoutes component={protectedRoutes} />
           </Switch>
         </section>

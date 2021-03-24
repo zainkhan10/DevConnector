@@ -301,19 +301,19 @@ router.delete("/education/:edu_id", auth, async (req, res) => {
 router.get("/github/:username", (req, res) => {
   try {
     const options = {
-      uri: `https://api.github.com/users/${
-        req.params.username
-      }/repos?per_page=5&
-      sort=created:asc&client_id=${config.get(
-        "githubClientId"
-      )}&client_secret=${config.get("githubSecret")}`,
+      uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&
+      sort=created:asc`,
       method: "GET",
-      headers: { "user-agent": "node.js" },
+      headers: {
+        "user-agent": "node.js",
+        "X-RateLimit-Limit": 5000,
+        "X-RateLimit-Remaining": 4966
+      },
     };
     request(options, (err, response, body) => {
       if (err) console.error(err);
       if (response.statusCode !== 200) {
-        res.status(404).json({ msg: "No Github profile found" });
+        return res.status(404).json({ msg: "No Github profile found" });
       }
       res.json(JSON.parse(body));
     });

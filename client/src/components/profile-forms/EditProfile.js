@@ -38,13 +38,13 @@ const EditProfile = ({ history }) => {
   } = formData;
 
   useEffect(() => {
-    getCurrentProfile();
+    dispatch(getCurrentProfile());
     setFormData({
       company: profile.company || "",
       website: profile.website || "",
       location: profile.location || "",
       status: profile.status || "",
-      skills: profile.skills.join(',') || "",
+      skills: profile.skills.join(",") || "",
       githubusername: profile.githubusername || "",
       bio: profile.bio || "",
       twitter: profile.social.twitter || "",
@@ -53,7 +53,7 @@ const EditProfile = ({ history }) => {
       instagram: profile.social.instagram || "",
       youtube: profile.social.youtube || "",
     });
-  }, [loading]);
+  }, [loading, dispatch, profile]);
 
   const onChange = ({ target }) =>
     setFormData({ ...formData, [target.name]: target.value });
