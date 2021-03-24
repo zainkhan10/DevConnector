@@ -1,5 +1,6 @@
 import { HttpRequest } from "../../../utils/httpRequests";
 import {
+  ADD_POST,
   DELETE_POST,
   GET_POSTS_FAILURE,
   GET_POSTS_INITIATE,
@@ -70,6 +71,26 @@ export const deletePost = (postId) => async (dispatch) => {
     });
     dispatch(actionDispatch(DELETE_POST, postId));
     dispatch(setAlert("Post Removed", "success"));
+  } catch (err) {
+    dispatch(
+      actionDispatch(GET_POSTS_FAILURE, {
+        msg: err.response.statusText,
+        status: err.response.status,
+      })
+    );
+  }
+};
+
+export const addPost = (DTO) => async (dispatch) => {
+  try {
+    console.log("DTO: ", DTO)
+    const response = await HttpRequest({
+      method: "post",
+      uri: `/posts`,
+      data: DTO,
+    });
+    dispatch(actionDispatch(ADD_POST, response));
+    dispatch(setAlert("Post Created", "success"));
   } catch (err) {
     dispatch(
       actionDispatch(GET_POSTS_FAILURE, {

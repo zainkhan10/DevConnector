@@ -1,4 +1,5 @@
 import {
+  ADD_POST,
   DELETE_POST,
   GET_POSTS_FAILURE,
   GET_POSTS_INITIATE,
@@ -39,6 +40,9 @@ export const postReducer = (state = initState, action) => {
         loading: false,
         posts: state.posts.filter((post) => post._id !== payload),
       };
+
+    case ADD_POST:
+      return { ...state, loading: false, posts: [payload, ...state.posts] };
 
     default:
       return state;

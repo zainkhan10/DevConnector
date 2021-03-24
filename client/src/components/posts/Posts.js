@@ -2,6 +2,7 @@ import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../store/actions/creators/Post";
 import Spinner from "../layout/Spinner";
+import PostForm from "./PostForm";
 import PostItem from "./PostItem";
 
 const Posts = () => {
@@ -20,7 +21,7 @@ const Posts = () => {
       <p className="lead">
         <i className="fas fa-user"></i> Welcome to the community!
       </p>
-      {/* Posts Form */}
+      <PostForm />
       <div className="posts">
         {posts.map((post) => (
           <PostItem key={post._id} post={post} />
